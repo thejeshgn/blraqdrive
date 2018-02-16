@@ -17,7 +17,8 @@ def step1_match_minute():
 
 	matched_minute = db['matched_minute']
 	minute_query = """
-	select distinct substr(locations.ist_time, 0, 17) time, aq.pm25 as pm25, aq.pm10 as pm10, locations.latitude as latitude, locations.longitude as longitude 
+	select distinct substr(locations.ist_time, 0, 17) time, aq.pm25 as pm25, aq.pm10 as pm10, 
+		locations.latitude as latitude, locations.longitude as longitude, locations.track as track 
 	from locations, aq  
 	where substr(locations.ist_time, 0, 17) = substr(aq.CreatedDate,0,17)
 	"""
@@ -37,7 +38,8 @@ def step2_match_seconds():
 
 	matched_seconds = db['matched_seconds']
 	second_query = """
-	select distinct locations.ist_time as time, aq.pm25 as pm25, aq.pm10 as pm10, locations.latitude as latitude , locations.longitude as longitude 
+	select distinct locations.ist_time as time, aq.pm25 as pm25, aq.pm10 as pm10, 
+		locations.latitude as latitude , locations.longitude as longitude, locations.track as track 
 	from locations, aq  
 	where locations.ist_time = aq.CreatedDate;
 	"""
@@ -53,7 +55,7 @@ def step2_match_seconds():
 
 
 def main():
-	#step1_match_minute()
+	step1_match_minute()
 	step2_match_seconds()
 
 if __name__ == "__main__":
