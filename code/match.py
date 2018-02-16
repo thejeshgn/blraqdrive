@@ -7,9 +7,8 @@ import dataset
 import json
 import string
 
-root_raw_data_folder = '/home/thej/code/blraq/data/aq'
-db = dataset.connect('sqlite:////home/thej/code/blraq/data/db/data.sqlite3')	
-
+root_raw_data_folder = '/home/thej/Documents/code/blraqdrive/data/aq'
+db = dataset.connect('sqlite:////home/thej/Documents/code/blraqdrive/data/db/data.sqlite3')		
 
 
 
@@ -17,7 +16,7 @@ def step1_match_minute():
 
 	matched_minute = db['matched_minute']
 	minute_query = """
-	select distinct substr(locations.ist_time, 0, 17) time, aq.pm25 as pm25, aq.pm10 as pm10, 
+	select distinct substr(locations.ist_time, 0, 17) time, CAST(aq.pm25 AS FLOAT) as pm25, CAST(aq.pm10 AS FLOAT) as pm10, 
 		locations.latitude as latitude, locations.longitude as longitude, locations.track as track 
 	from locations, aq  
 	where substr(locations.ist_time, 0, 17) = substr(aq.CreatedDate,0,17)
@@ -38,7 +37,7 @@ def step2_match_seconds():
 
 	matched_seconds = db['matched_seconds']
 	second_query = """
-	select distinct locations.ist_time as time, aq.pm25 as pm25, aq.pm10 as pm10, 
+	select distinct locations.ist_time as time, CAST(aq.pm25 AS FLOAT) as pm25, CAST(aq.pm10 AS FLOAT) as pm10, 
 		locations.latitude as latitude , locations.longitude as longitude, locations.track as track 
 	from locations, aq  
 	where locations.ist_time = aq.CreatedDate;

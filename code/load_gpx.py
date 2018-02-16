@@ -1,4 +1,4 @@
-# coding=utf-8
+	# coding=utf-8
 import sys
 import os
 import sqlite3 as lite
@@ -12,11 +12,11 @@ import arrow
 import pytz
 from pytz import timezone
 
-root_raw_data_folder = '/home/thej/code/blraq/data/gpx'
+root_raw_data_folder = '/home/thej/Documents/code/blraqdrive/data/gpx'
 
 
 def step1_import_gpx():
-	db = dataset.connect('sqlite:////home/thej/code/blraq/data/db/data.sqlite3')	
+	db = dataset.connect('sqlite:////home/thej/Documents/code/blraqdrive/data/db/data.sqlite3')	
 	locations = db['locations']	
 	#IST format 2018-02-05 00:01:00
 
